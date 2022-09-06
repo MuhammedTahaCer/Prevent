@@ -128,9 +128,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\ScreenSaveBlock\ScreenSaveBlock.csproj">
-      <Project>{10488763-8C6D-4C59-B3B3-77AB635B5078}</Project>
-      <Name>ScreenSaveBlock</Name>
+    <ProjectReference Include="..\ScreenSaveBlock\PreventScreenSave.csproj">
+      <Project>{2F5FB2AA-072D-417C-8870-B045F7D92EEE}</Project>
+      <Name>PreventScreenSave</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

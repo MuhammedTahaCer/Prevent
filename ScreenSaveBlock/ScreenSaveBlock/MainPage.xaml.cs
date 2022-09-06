@@ -5,14 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
-namespace ScreenSaveBlock
+namespace PreventScreenSave
 {
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        async void Button1_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Page2());
+
+            if (Screenshot.IsCaptureSupported)
+            {
+                try
+                {
+                    var screenshot = await Screenshot.CaptureAsync();
+                    var stream = await screenshot.OpenReadAsync();
+
+                    var captured = ImageSource.FromStream(() => stream);
+                    if (captured != null)
+                    {
+                        captured = null;
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    await DisplayAlert("Uyarı!", "Yapmak istediğiniz işlem uyg tarafından desteklenmemektedir!", "Geri Dön");
+                }
+
+
+            }
+
         }
     }
 }
