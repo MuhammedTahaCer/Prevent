@@ -16,29 +16,33 @@ namespace PreventScreenSave
             InitializeComponent();
         }
 
-        async void Button1_Clicked(object sender, EventArgs e)
+        private void Button1_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Page2());
+             Navigation.PushAsync(new Page2());
+        }
 
-            if (Screenshot.IsCaptureSupported)
-            {
-                try
+      async  private Task ListenEvent(object sender, EventArgs e)
+        {
+
+                if (Screenshot.IsCaptureSupported)
                 {
-                    var screenshot = await Screenshot.CaptureAsync();
-                    var stream = await screenshot.OpenReadAsync();
-
-                    var captured = ImageSource.FromStream(() => stream);
-                    if (captured != null)
+                    try
                     {
-                        captured = null;
+                        var screenshot = await Screenshot.CaptureAsync();
+                        var stream = await screenshot.OpenReadAsync();
+
+                        var captured = ImageSource.FromStream(() => stream);
+                        if (captured != null)
+                        {
+                            captured = null;
+                        }
+                    }
+                    catch (InvalidOperationException)
+                    {
+                      await  DisplayAlert("Uyarı!", "Yapmak istediğiniz işlem uyg tarafından desteklenmemektedir!", "Geri Dön");
                     }
                 }
-                catch (InvalidOperationException)
-                {
-                    await DisplayAlert("Uyarı!", "Yapmak istediğiniz işlem uyg tarafından desteklenmemektedir!", "Geri Dön");
-                }
-
-
+        }
             }
 
         }

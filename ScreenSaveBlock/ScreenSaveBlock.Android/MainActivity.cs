@@ -19,7 +19,7 @@ namespace XamarinApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            this.Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+          //  this.Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
             LoadApplication(new App());
         }
