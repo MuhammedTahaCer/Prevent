@@ -37,7 +37,6 @@ namespace PreventScreenSave.iOS
                 //Do something
             }
         }
-        old resign:
         public override void OnResignActivation(UIApplication application)
         {
             try
