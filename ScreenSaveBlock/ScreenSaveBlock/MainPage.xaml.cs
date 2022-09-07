@@ -43,8 +43,8 @@ namespace PreventScreenSave
                     }
                 }
         }
+
+
             }
 
         }
-    }
-}
