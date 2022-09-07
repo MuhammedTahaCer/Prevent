@@ -32,10 +32,7 @@ namespace PreventScreenSave
                         var stream = await screenshot.OpenReadAsync();
 
                         var captured = ImageSource.FromStream(() => stream);
-                        if (captured != null)
-                        {
-                            captured = null;
-                        }
+                        captured = null;
                     }
                     catch (InvalidOperationException)
                     {
