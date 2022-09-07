@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace ScreenSaveBlock.iOS
+namespace PreventScreenSave.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
@@ -13,13 +13,48 @@ namespace ScreenSaveBlock.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        //
-        // This method is invoked when the application has loaded and is ready to run. In this 
-        // method you should instantiate the window, load the UI into it and then make the window
-        // visible.
-        //
-        // You have 17 seconds to return from this method, or iOS will terminate your application.
-        //
+        NSObject _screenshotNotification = null;
+
+        public override void OnActivated(UIApplication application)
+        {
+            try
+            {
+                // Start observing screenshot notification
+                if (_screenshotNotification == null)
+                {
+                    _screenshotNotification = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.UserDidTakeScreenshotNotification,
+                                (NSNotification n) => {
+
+                                    Console.WriteLine("UserDidTakeScreenshotNotification");
+
+                                    n.Dispose();
+                                }
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                //Do something
+            }
+        }
+        old resign:
+        public override void OnResignActivation(UIApplication application)
+        {
+            try
+            {
+                // Stop observer
+                if (_screenshotNotification != null)
+                {
+                    NSNotificationCenter.DefaultCenter.RemoveObserver(_screenshotNotification);
+                    _screenshotNotification.Dispose();
+                    _screenshotNotification = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                TestMessage();
+            }
+        }
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
@@ -27,5 +62,18 @@ namespace ScreenSaveBlock.iOS
 
             return base.FinishedLaunching(app, options);
         }
+
+        public void TestMessage()
+        {
+            var pushView = UIAlertController.Create("Hata", "Uygulama Bu Özelliğe izin vermiyor", UIAlertControllerStyle.Alert);
+            pushView.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, alert => Console.WriteLine("Pushed")));
+            //UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(pushView, true, null);
+
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Window.RootViewController = new UIViewController();
+            Window.MakeKeyAndVisible();
+            Window.RootViewController.PresentViewController(pushView, true, null);
+        }
+
     }
 }

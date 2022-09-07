@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +18,7 @@ namespace PreventScreenSave
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()

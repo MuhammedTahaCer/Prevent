@@ -5,7 +5,7 @@ using AppDynamics.Agent;
 using Foundation;
 using UIKit;
 
-namespace ScreenSaveBlock.iOS
+namespace PreventScreenSave.iOS
 {
     public class Application
     {

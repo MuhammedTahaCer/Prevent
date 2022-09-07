@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using Android.Views;
 using PreventScreenSave;
+using Xamarin.Essentials;
 
 namespace XamarinApp.Droid
 {
@@ -18,16 +19,13 @@ namespace XamarinApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-          //  this.Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+            // The secure flag does block both normal screenshot and video capture.
+            this.Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
             LoadApplication(new App());
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-}
+	}
+
+   }
+    
