@@ -13,20 +13,33 @@ namespace PreventScreenSave
     public partial class MainPage : ContentPage
     {
 
-        
+     //   public static string okeyMessage = "okeyMessage";
+        public void msg()
+        {
+            DisplayAlert("Uyarı!", "Ekran Görüntüsü alma özelliği uygulama tarafından desteklenmemektedir!", "Geri Dön");
+        }
+
+
         public MainPage()
         {
             InitializeComponent();
 
-
         }
+        //static void ListenEvent()
+        //{
+
+        //    Task.Run(() => { msg(); });
+        //}
+
+
 
         private void Button1_Clicked(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new Page2());
+            Navigation.PushAsync(new Page2());
         }
 
-        async private Task ListenEvent(object sender, EventArgs e)
+
+        async private Task msg(object sender, EventArgs e)
         {
 
             if (Screenshot.IsCaptureSupported)
@@ -47,6 +60,8 @@ namespace PreventScreenSave
         }
 
 
+
+
     }
 
-        }
+}
