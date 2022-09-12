@@ -49,7 +49,7 @@ namespace PreventScreenSave.iOS
                     _screenshotNotification = null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TestMessage();
             }
